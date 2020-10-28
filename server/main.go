@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
 	"sort"
@@ -78,6 +79,10 @@ func cors(c *gin.Context) {
 }
 
 func main() {
+	flag.IntVar(&maxmsgs, "list-size", 10, "You can adjust the no. of recent operations, default is 10")
+	flag.Parse()
+
+	fmt.Println("Size of the list: ", maxmsgs)
 	go websocket.SetUpWS()
 
 	initDb()
